@@ -21,6 +21,7 @@ app.use(function(req, res, next) {
 
 app.listen(3000)
 
+
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
   files = fs.readdirSync(__dirname+"/saved_sessions")
@@ -45,6 +46,9 @@ app.get('/api/:filename', function (req, res) {
 app.post('/api',(request, response)=>{
   var data = JSON.stringify(request.body)
   var data_str = JSON.parse(data)
+  if (!fs.existsSync('saved_sessions')){
+    fs.mkdirSync('saved_sessions')
+  }
   fs.writeFile(`saved_sessions/${data_str["session_name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });
@@ -62,8 +66,13 @@ app.post('/gif',(request, response)=>{
 
   xoxox = makePngs(name,speed,frames)
   // spawn('python3', ['convert_png.py'])
+  if (!fs.existsSync('extracted_gifs')){
+    fs.mkdirSync('extracted_gifs')
+  }
 
   setTimeout(() => { spawn('python3', ['convert_png.py']); }, 20000);
+
+
 
 
   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
@@ -78,6 +87,7 @@ PNG = require('pngjs').PNG;
 var spawn = require('child_process').spawn
 
 function makePngs(name,speed, frames){
+
 
 let margin = 0;
 let brick_dim = [7, 10];
@@ -145,7 +155,9 @@ for (let r = 0; r < num_rows; r++) {
   }
 }
 
-console.log(i)
+if (!fs.existsSync('pngs_container')){
+  fs.mkdirSync('pngs_container')
+}
 png.pack().pipe(fs.createWriteStream(`pngs_container/${name}_${speed}_${i}.png`));
 
 }
