@@ -1,10 +1,10 @@
 const http = require('http')
 const os = require('os')
 const path = require('path')
-
 const express = require('express')
 const fs = require('fs')
-// const hti = require('html-to-image')
+const PNG = require('pngjs').PNG;
+
 
 app = express()
 
@@ -82,7 +82,6 @@ app.post('/gif',(request, response)=>{
 })
 
 
-PNG = require('pngjs').PNG;
 
 var spawn = require('child_process').spawn
 
