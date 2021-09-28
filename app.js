@@ -22,6 +22,10 @@ app.use(function(req, res, next) {
 app.listen(3000)
 console.log("listening to port 3000")
 
+app.get('/check',function (req,res){
+  console.log("running")
+}
+
 
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
