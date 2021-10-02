@@ -24,6 +24,11 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
+// let port = "http://localhost:3000"
+
+let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
+
+
 
 let cb = colorOscillatorCb('#ff0000', '#3333cc', 50);
 // #ff6699 #9966ff 44
@@ -838,11 +843,12 @@ function deleteColor(id){
   elem.remove(elem);
 }
 
+//'http://localhost:3000/gif'
 document.querySelector(".extract.save_btn").addEventListener("click", function(){
   const name = window.prompt("enter gif name")
 
   data = {"name":name,"speed":Math.round(time_ms),"data": renderAnimation()}
-  fetch('http://localhost:3000/gif', {
+  fetch(port + '/gif', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
@@ -861,7 +867,7 @@ document.querySelector(".save.save_btn").addEventListener("click", function(){
   data_dict["frames"] = frames;
   data_dict["session_name"] = session_name;
   data_dict["rendered_animation"] = renderAnimation()
-  fetch('http://localhost:3000/api', {
+  fetch(port+'/api', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
@@ -872,9 +878,9 @@ document.querySelector(".save.save_btn").addEventListener("click", function(){
 
 document.querySelector(".load.save_btn").addEventListener("click",async function(){
   // const session_name = window.prompt("Enter session name here");
-  let fn_list = await fetch(`http://localhost:3000/api/sessions`, {method: 'GET' }).then(res => res.json())
+  let fn_list = await fetch(port+`/api/sessions`, {method: 'GET' }).then(res => res.json())
   const session_name = window.prompt("Enter session name from the following list   " + fn_list);
-   let data = await fetch(`http://localhost:3000/api/${session_name}`, {method: 'GET' }).then(res => res.json())
+   let data = await fetch(port + `/api/${session_name}`, {method: 'GET' }).then(res => res.json())
    LoadSession(data)
    console.log(`num_animations ${num_animations}`)
 })

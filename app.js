@@ -19,8 +19,8 @@ app.use(function(req, res, next) {
     next();
 })
 
-app.listen(4000)
-console.log("listening to port 4000")
+app.listen(3000)
+console.log("listening to port 3000")
 
 app.get('/check',function (req,res){
   console.log("running")
