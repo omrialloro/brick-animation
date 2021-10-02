@@ -24,9 +24,11 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-// let port = "http://localhost:3000"
+let port = "http://localhost:3000"
 
-let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
+// let port = "http://3.69.98.116:3000"
+
+// let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
 
 
 

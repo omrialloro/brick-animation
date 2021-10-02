@@ -1,6 +1,7 @@
 from PIL import Image
 import glob
 import os
+print("insid python!")
 
 # Create the frames
 
