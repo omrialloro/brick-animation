@@ -24,9 +24,9 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-let port = "http://localhost:3000"
+// let port = "http://localhost:3000"
 
-// let port = "http://3.69.98.116:3000"
+let port = "http://3.69.98.116:3000"
 
 // let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
 
@@ -904,7 +904,7 @@ function LoadSession(data){
     // nn +=1
     num_animations +=1
     color_dict[index] = colorAnimationCb(animation_colors[index])
-    CreatAnimationButtons(num_animations,index)
+    // CreatAnimationButtons(num_animations,index)
     CreatAnimationColor(num_animations, index)
   }
   gradient_colors = data["gradient_colors"]

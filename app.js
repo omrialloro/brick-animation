@@ -76,10 +76,6 @@ app.post('/gif',(request, response)=>{
   }
 
   setTimeout(() => { spawn('python3', ['convert_png.py']); }, 20000);
-
-
-
-
   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });

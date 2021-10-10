@@ -36,20 +36,22 @@ width: 250px;
 display: inline;
 transform: rotate(-90deg);
 }
-.creation {
-  display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 150px;
-    width: 720px;
-    margin: 0 auto 10px auto;
+
+.interface {
+  margin-left: 50px;
+}
+.timeline {
+  height: 8vh;
+  width: 84vh;
+  margin: 2vh auto 2vh auto;
 }
 
 .creation_buttons
   {
-    display:flex;
-    justify-content: space-evenly;
-    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 320px;
 }
 
 
@@ -70,9 +72,10 @@ transform: rotate(-90deg);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  height: 50px;
-  width: 280px;
+  height: 110px;
+  width: 160px;
 }
 
 
@@ -88,29 +91,30 @@ transform: rotate(-90deg);
 
 .errows {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 80px;
   width: 160px;
 }
 
 .button_errows {
+  margin: 0 5px;
   height:35px;
   width: 35px;
   background-color: #AAD5FF;
   border: 2px solid black;
 }
 
-.timeline
-  {
-    height: 50px;
+.errows_bottom {
+ display:flex;
 }
 
 
 
+
 input[type=range] {
-  width: 720px;
+  width: 84vh;
   max-width: 800px;
   margin: 20px auto 20px auto;
   background-color: transparent;
@@ -165,7 +169,7 @@ main {
 }
 
 .action {
-  height: 800px;
+  height: 720px;
   width: 160px;
   margin:0 15px;
 }
@@ -178,13 +182,13 @@ main {
 .colors {
   width: 160px;
   height: 140px;
-  margin-bottom: 10px;
+  margin-bottom: 32px;
   border-bottom: 0.5px solid #000;
 }
 
 .patterns {
   width: 160px;
-  height: 450px;
+  height: 160px;
   margin-bottom: 15px;
   border-bottom: 0.5px solid #000;
 }
@@ -248,7 +252,7 @@ border-radius: 5px;
 
 .shapes {
   width: 160px;
-  height: 450px;
+  height: 360px;
 }
 
 .shapes p {
@@ -259,13 +263,13 @@ border-radius: 5px;
 .shape_selector {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
 }
 
 .shape {
-  width: 65px;
-  height: 65px
+  width: 48px;
+  height: 48px
   border: 1px solid #000;
   margin: 7px;
   background-color: #C4C4C4;
@@ -275,8 +279,8 @@ border-radius: 5px;
 
 .grid {
   background-color: blue;
-  height: 720px;
-  width: 720px;
+  height: 84vh;
+  width: 84vh;
   margin: 0 15px;
   display: grid;
   grid-template-columns: repeat(30, 1fr);
@@ -284,6 +288,11 @@ border-radius: 5px;
   grid-column-gap: 0;
   grid-row-gap: 0;
 
+}
+
+button {
+  width: 2.8vh;
+  height: 2.8vh;
 }
 /*
 .brick {
@@ -299,7 +308,7 @@ justify-content: space-between;
 align-content: center;
 height: 50px;
 width: 160px;
-margin-bottom: 40px;
+margin: 32px 0;
 }
 
 .mp_button {
@@ -315,7 +324,7 @@ border: 2px solid #000;
   justify-content: space-between;
   align-items: center;
   width: 130px;
-  margin-bottom: 130px;
+  margin-bottom: 50px;
 }
 
 .fps {
@@ -353,7 +362,7 @@ border: 2px solid #000;
 }
 .save_buttons {
   display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    height: 200px;
+    height: 60px;
 }

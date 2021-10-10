@@ -8,196 +8,206 @@
 <nav>
   <h1>shape animation</h1>
 </nav>
-<section class="creation">
-  <div class="creation_buttons">
+<div class="interface">
 
-    <div class="newframe">
-      <div class="newframe_btn">
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49"><defs><style>.cls-1{fill:red;}</style></defs><polygon class="cls-1" points="49 21 28 21 28 0 21 0 21 21 0 21 0 28 21 28 21 49 28 49 28 28 49 28 49 21"/></svg>
+    <section class="timeline">
+        <input type="range" min="0" max="12" value="0" class="slider" id="frame_slider">
+    </section>
+
+
+  <main>
+    <section class="action left">
+      <div class="colors">
+        <div class="select_bar">
+          <form action="/action_page.php">
+                <select name="schemes" id="scheme">
+                  <option value="default"><p>default color scheme</p></option>
+                  <option value="ocean">ocean</option>
+                  <option value="caribean">caribean</option>
+                  <option value="futuristic">futuristic </option>
+                </select>
+          </form>
+        </div>
+        <div class="color_selector">
+        <div class="color" id="color1"></div>
+        <div class="color" id="color2"></div>
+        <div class="color" id="color3"></div>
+        <div class="color" id="color4"></div>
+        <div class="color" id="color5"></div>
+        <div class="color" id="color6"></div>
+
       </div>
-      <div class="newframe_count">
-        <p>12</p>
+
+
       </div>
-    </div>
-    <div class="creation_btns">
-        <div class="button_create undo">
-           <img src="undo.svg">
-         </div>
-        <div class="button_create reverse">
-          <img src="reverse.svg">
-         </div>
-          <div class="button_create clear">
-            <img src="clear.svg">
+
+
+
+      <div class="shapes">
+        <p> Select shape:</p>
+        <div class="shape_selector">
+          <div class="shape" id="shape1">
+            <img src="shape1.svg">
           </div>
-        <div class="button_create_grd">
-        grd
-         </div>
-        <div class="button_create_ocs">
-            ocs
-         </div>
-    </div>
-    <div class="errows">
-      <div class="button_errows left">
-          <img src="left.svg">
-       </div>
-      <div class="button_errows up">
-          <img src="up.svg">
+          <div class="shape" id="shape2">
+            <img src="shape2.svg">
+
+          </div>
+          <div class="shape" id="shape3">
+            <img src="shape3.svg">
+
+          </div>
+          <div class="shape" id="shape4">
+            <img src="shape4.svg">
+
+          </div>
+          <div class="shape" id="shape5">
+            <img src="shape5.svg">
+
+          </div>
+          <div class="shape" id="shape6">
+            <img src="shape6.svg">
+          </div>
+          <div class="shape" id="shape7">
+            <img src="shape7.svg">
+          </div>
+          <div class="shape" id="shape8">
+            <img src="shape8.svg">
+          </div>
+          <div class="shape" id="shape9">
+            <img src="shape9.svg">
+          </div>
+          <div class="shape" id="shape10">
+            <img src="shape10.svg">
+          </div>
+        </div>
       </div>
-      <div class="button_errows right">
-          <img src="right.svg">
-       </div>
-      <div class="button_errows down">
-          <img src="down.svg">
-       </div>
-    </div>
-
-  </div>
-
-  <div class="timeline">
-      <input type="range" min="0" max="12" value="0" class="slider" id="frame_slider">
-</div>
-
-
-</section>
-
-
-<main>
-  <section class="action left">
-    <div class="colors">
-      <div class="select_bar">
-        <form action="/action_page.php">
-              <select name="schemes" id="scheme">
-                <option value="default"><p>default color scheme</p></option>
-                <option value="ocean">ocean</option>
-                <option value="caribean">caribean</option>
-                <option value="futuristic">futuristic </option>
-              </select>
-        </form>
-      </div>
-      <div class="color_selector">
-      <div class="color" id="color1"></div>
-      <div class="color" id="color2"></div>
-      <div class="color" id="color3"></div>
-      <div class="color" id="color4"></div>
-      <div class="color" id="color5"></div>
-      <div class="color" id="color6"></div>
-
-    </div>
-
-
-    </div>
-
 
     <div class="patterns">
-      <div class="create_pattern">
-        <p>create a pattern</p>
-      </div>
-      <div class="pattern_selector">
-      <!-- <div class="pattern" id="pattern1"></div>
-      <div class="pattern" id="pattern2"></div>
-      <div class="pattern" id="pattern3"></div> -->
-
-    </div>
-
-    <div class="bin" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
-
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 284 375.28"><path d="M103.11,550.05h249.8c-.43,6.22-.79,12.28-1.26,18.33q-4.33,57-8.71,114c-2.38,31.4-4.63,62.82-7.06,94.22-1.06,13.69-1.47,27.54-3.88,41-3.92,21.92-23.25,36.91-45.54,36.91H168.72c-23.1,0-43.68-18.33-45.69-41.35-2.32-26.52-4.11-53.08-6.13-79.62q-3.23-42.43-6.45-84.86-3.18-42.26-6.3-84.5C103.81,559.6,103.47,555,103.11,550.05Zm71.55,160.74h0q-1.59-45.36-3.19-90.71c-.29-8.12-.46-16.26-1.3-24.33-.66-6.39-6.22-11-11.64-10.55s-9.18,5.12-9.6,11.6a16.68,16.68,0,0,0,0,1.87q1.77,37.1,3.56,74.18,2.9,59,5.82,118c.49,9.86.93,19.73,1.5,29.59a10,10,0,0,0,8.07,9.56c4.35.78,8.55-1.28,10-5.39a17.38,17.38,0,0,0,.65-6.25Q176.61,764.57,174.66,710.79Zm127.06-2.53c.14-2.25.29-4.49.4-6.74q2.22-44.73,4.38-89.47a154.49,154.49,0,0,0,.24-17.21,10.07,10.07,0,0,0-19.47-3.22,26.23,26.23,0,0,0-2,9c-.73,16.6-1.21,33.21-1.8,49.82q-1.73,47.94-3.47,95.89-1.32,36.89-2.55,73.79c-.18,5.8,3.28,9.71,8.39,10a9.73,9.73,0,0,0,10.32-9.19c.37-4.36.53-8.73.74-13.1Q299.32,758.06,301.72,708.26Zm-84.39.31h1.1q0,47.05,0,94.12c0,6.37,0,12.76.42,19.11a8.87,8.87,0,0,0,9,8.34,9.12,9.12,0,0,0,9.33-8,23.15,23.15,0,0,0,.31-3.72q.39-59.82.76-119.62.28-44.43.58-88.87a142.05,142.05,0,0,0-.33-14.6c-.56-5.76-5.22-10-10.29-10.14-4.89-.11-9.45,3.88-10.61,9.42a23.8,23.8,0,0,0-.35,4.85c0,7.5.08,15,.08,22.5Q217.35,665.26,217.33,708.57Z" transform="translate(-85.93 -479.26)"/><path d="M369.59,536.94H86.64C83,523,94,508.4,108.59,508.3c18.63-.14,37.25,0,55.88,0h11.22c2.25-5.74,3.77-11.19,6.41-16,4.84-8.83,12.65-13,22.85-12.91,15.13.15,30.26.41,45.37-.06,16-.49,24.95,10.91,27.85,22.87,1.48,6.09,1.34,6.12,7.44,6.12h59.63C361.67,508.26,372,520.28,369.59,536.94Z" transform="translate(-85.93 -479.26)"/></svg>
-    </div>
-
-    </div>
-
-
-    <div class="shapes">
-      <p> Select shape:</p>
-      <div class="shape_selector">
-        <div class="shape" id="shape1">
-          <img src="shape1.svg">
+        <div class="create_pattern">
+          <p>create a pattern</p>
         </div>
-        <div class="shape" id="shape2">
-          <img src="shape2.svg">
+        <div class="pattern_selector">
+        <!-- <div class="pattern" id="pattern1"></div>
+        <div class="pattern" id="pattern2"></div>
+        <div class="pattern" id="pattern3"></div> -->
 
-        </div>
-        <div class="shape" id="shape3">
-          <img src="shape3.svg">
-
-        </div>
-        <div class="shape" id="shape4">
-          <img src="shape4.svg">
-
-        </div>
-        <div class="shape" id="shape5">
-          <img src="shape5.svg">
-
-        </div>
-        <div class="shape" id="shape6">
-          <img src="shape6.svg">
-        </div>
-        <div class="shape" id="shape7">
-          <img src="shape7.svg">
-        </div>
-        <div class="shape" id="shape8">
-          <img src="shape8.svg">
-        </div>
-        <div class="shape" id="shape9">
-          <img src="shape9.svg">
-        </div>
-        <div class="shape" id="shape10">
-          <img src="shape10.svg">
-        </div>
-      </div>
-    </div>
-
-  </section>
-  <section class="grid">
-  </section>
-
-  <section class="action right">
-    <div class="media_player">
-      <div class="mp_button play">
-          <img src="play.svg">
-      </div>
-      <div class="mp_button loop">
-          <img src="loop.svg">
-      </div>
-      <div class="mp_button reset">
-          <img src="reset.svg">
       </div>
 
-    </div>
+      <div class="bin" ondrop="dragDrop(event)" ondragover="allowDrop(event)">
 
-   <div class="fps_btns">
-     <div class="fps_plus">
-      +
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 284 375.28"><path d="M103.11,550.05h249.8c-.43,6.22-.79,12.28-1.26,18.33q-4.33,57-8.71,114c-2.38,31.4-4.63,62.82-7.06,94.22-1.06,13.69-1.47,27.54-3.88,41-3.92,21.92-23.25,36.91-45.54,36.91H168.72c-23.1,0-43.68-18.33-45.69-41.35-2.32-26.52-4.11-53.08-6.13-79.62q-3.23-42.43-6.45-84.86-3.18-42.26-6.3-84.5C103.81,559.6,103.47,555,103.11,550.05Zm71.55,160.74h0q-1.59-45.36-3.19-90.71c-.29-8.12-.46-16.26-1.3-24.33-.66-6.39-6.22-11-11.64-10.55s-9.18,5.12-9.6,11.6a16.68,16.68,0,0,0,0,1.87q1.77,37.1,3.56,74.18,2.9,59,5.82,118c.49,9.86.93,19.73,1.5,29.59a10,10,0,0,0,8.07,9.56c4.35.78,8.55-1.28,10-5.39a17.38,17.38,0,0,0,.65-6.25Q176.61,764.57,174.66,710.79Zm127.06-2.53c.14-2.25.29-4.49.4-6.74q2.22-44.73,4.38-89.47a154.49,154.49,0,0,0,.24-17.21,10.07,10.07,0,0,0-19.47-3.22,26.23,26.23,0,0,0-2,9c-.73,16.6-1.21,33.21-1.8,49.82q-1.73,47.94-3.47,95.89-1.32,36.89-2.55,73.79c-.18,5.8,3.28,9.71,8.39,10a9.73,9.73,0,0,0,10.32-9.19c.37-4.36.53-8.73.74-13.1Q299.32,758.06,301.72,708.26Zm-84.39.31h1.1q0,47.05,0,94.12c0,6.37,0,12.76.42,19.11a8.87,8.87,0,0,0,9,8.34,9.12,9.12,0,0,0,9.33-8,23.15,23.15,0,0,0,.31-3.72q.39-59.82.76-119.62.28-44.43.58-88.87a142.05,142.05,0,0,0-.33-14.6c-.56-5.76-5.22-10-10.29-10.14-4.89-.11-9.45,3.88-10.61,9.42a23.8,23.8,0,0,0-.35,4.85c0,7.5.08,15,.08,22.5Q217.35,665.26,217.33,708.57Z" transform="translate(-85.93 -479.26)"/><path d="M369.59,536.94H86.64C83,523,94,508.4,108.59,508.3c18.63-.14,37.25,0,55.88,0h11.22c2.25-5.74,3.77-11.19,6.41-16,4.84-8.83,12.65-13,22.85-12.91,15.13.15,30.26.41,45.37-.06,16-.49,24.95,10.91,27.85,22.87,1.48,6.09,1.34,6.12,7.44,6.12h59.63C361.67,508.26,372,520.28,369.59,536.94Z" transform="translate(-85.93 -479.26)"/></svg>
+      </div>
+
+      </div>
+
+
+    </section>
+    <section class="grid">
+    </section>
+
+    <section class="action right">
+      <div class="creation_buttons">
+
+        <div class="newframe">
+          <div class="newframe_btn">
+            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49"><defs><style>.cls-1{fill:red;}</style></defs><polygon class="cls-1" points="49 21 28 21 28 0 21 0 21 21 0 21 0 28 21 28 21 49 28 49 28 28 49 28 49 21"/></svg>
+          </div>
+          <div class="newframe_count">
+            <p>12</p>
+          </div>
+        </div>
+        <div class="creation_btns">
+            <div class="button_create undo">
+               <img src="undo.svg">
+             </div>
+            <div class="button_create reverse">
+              <img src="reverse.svg">
+             </div>
+              <div class="button_create clear">
+                <img src="clear.svg">
+              </div>
+            <div class="button_create button_create_grd">
+            grd
+             </div>
+            <div class="button_create button_create_ocs">
+                ocs
+             </div>
+        </div>
+        <div class="errows">
+          <div class="errows_top">
+            <div class="button_errows up">
+                <img src="up.svg">
+            </div>
+          </div>
+          <div class="errows_bottom">
+            <div class="button_errows left">
+                <img src="left.svg">
+             </div>
+
+             <div class="button_errows down">
+                 <img src="down.svg">
+              </div>
+
+            <div class="button_errows right">
+                <img src="right.svg">
+             </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="media_player">
+        <div class="mp_button play">
+            <img src="play.svg">
+        </div>
+        <div class="mp_button loop">
+            <img src="loop.svg">
+        </div>
+        <div class="mp_button reset">
+            <img src="reset.svg">
+        </div>
+
+      </div>
+
+     <div class="fps_btns">
+       <div class="fps_plus">
+        +
+       </div>
+
+       <div class="fps_count_co">
+        <div class="fps_count">
+            12
+        </div>
+         <p>FPS</p>
+       </div>
+      <div class="fps_minus">
+        -
+      </div>
+
      </div>
 
-     <div class="fps_count_co">
-      <div class="fps_count">
-          12
-      </div>
-       <p>FPS</p>
+     <div class="save_buttons">
+       <div class="save save_btn">
+          <img src="save.svg">
+       </div>
+
+       <div class="extract save_btn">
+            <img src="extract.svg">
+       </div>
+
+       <div class="load save_btn">
+            <img src="save_temp.svg">
+       </div>
+
      </div>
-    <div class="fps_minus">
-      -
-    </div>
+     </section>
+  </main>
+</div>
 
-   </div>
-
-   <div class="save_buttons">
-     <div class="save save_btn">
-        <img src="save.svg">
-     </div>
-
-     <div class="extract save_btn">
-          <img src="extract.svg">
-     </div>
-
-     <div class="load save_btn">
-          <img src="save_temp.svg">
-     </div>
-
-   </div>
-   </section>
-</main>
 
 
 <script src="buttons.js"></script>
