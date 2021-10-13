@@ -27,7 +27,6 @@ let color_element_ids_dict = {}
 // let port = "http://localhost:3000"
 
 let port = "http://3.69.98.116:3000"
-
 // let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
 
 
@@ -308,6 +307,9 @@ function handlePlay(){
   else {
     if (!is_loop){
       is_play = !is_play;
+      if (current_frame>frames.length-2){
+        current_frame = 0;
+      }
       let num_remain_frames = run_frames();
       xxxx = setTimeout(function(){
         is_play = false;
@@ -847,7 +849,8 @@ function deleteColor(id){
 
 //'http://localhost:3000/gif'
 document.querySelector(".extract.save_btn").addEventListener("click", function(){
-  const name = window.prompt("enter gif name")
+  // const name = window.prompt("enter gif name")
+  name = String(Date.now())
 
   data = {"name":name,"speed":Math.round(time_ms),"data": renderAnimation()}
   fetch(port + '/gif', {
@@ -857,6 +860,15 @@ document.querySelector(".extract.save_btn").addEventListener("click", function()
     },
     body: JSON.stringify(data),
   })
+
+  aaa =  document.createElement(`a`);
+  aaa.href = port+`/download/${name}`
+  setTimeout(()=> {
+    console.log(aaa.href)
+    aaa.click()
+  }, 40000);
+
+
 })
 
 

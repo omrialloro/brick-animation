@@ -27,6 +27,14 @@ app.get('/check',function (req,res){
 }
 )
 
+app.get('/download/:filename', (req,res)=>{
+  const filename = req.params.filename
+  res.download(`extracted_gifs/${filename}.gif`)
+  setTimeout(()=>{
+    fs.unlinkSync(`extracted_gifs/${filename}.gif`)
+  },10000)
+})
+
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
   files = fs.readdirSync(__dirname+"/saved_sessions")
@@ -41,7 +49,6 @@ app.get('/api/sessions', function (req, res) {
 
 app.get('/api/:filename', function (req, res) {
   const filename = req.params.filename
-
   var data = fs.readFileSync(`saved_sessions/${filename}.json`)
   var data_str = JSON.parse(data)
   res.send(data_str)
@@ -75,11 +82,11 @@ app.post('/gif',(request, response)=>{
     fs.mkdirSync('extracted_gifs')
   }
 
+
   setTimeout(() => { spawn('python3', ['convert_png.py']); }, 20000);
   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });
-
 })
 
 
@@ -90,7 +97,7 @@ function makePngs(name,speed, frames){
 
 
 let margin = 0;
-let brick_dim = [7, 10];
+let brick_dim = [10, 10];
 
 num_rows = 30
 num_cols = 30

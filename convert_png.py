@@ -8,7 +8,7 @@ print("insid python!")
 frames = []
 imgs = glob.glob("pngs_container/*.png")
 name = imgs[1].split("/")[1].split("_")[0]
-speed = int(imgs[1].split("/")[1].split("_")[1])
+speed = int(imgs[1].split("/")[1].split("_")[-2])
 
 for i in range(len(imgs)):
     fn = f"pngs_container/{name}_{speed}_{i}.png"
