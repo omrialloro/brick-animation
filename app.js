@@ -30,9 +30,9 @@ app.get('/check',function (req,res){
 app.get('/download/:filename', (req,res)=>{
   const filename = req.params.filename
   res.download(`extracted_gifs/${filename}.gif`)
-  setTimeout(()=>{
-    fs.unlinkSync(`extracted_gifs/${filename}.gif`)
-  },10000)
+  // setTimeout(()=>{
+  //   fs.unlinkSync(`extracted_gifs/${filename}.gif`)
+  // },10000)
 })
 
 app.get('/api/sessions', function (req, res) {
@@ -83,7 +83,7 @@ app.post('/gif',(request, response)=>{
   }
 
 
-  setTimeout(() => { spawn('python3', ['convert_png.py']); }, 20000);
+  setTimeout(() => { spawn('python3', ['convert_png.py',name, speed]); }, 20000);
   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });
@@ -105,6 +105,9 @@ num_cols = 30
 let w = num_rows*(brick_dim[1]+margin)+margin
 let h = num_cols*(brick_dim[0]+margin)+margin
 
+fs.mkdirSync(name)
+
+
 for (let i = 0;i<frames.length;i++){
   frame = frames[i]
 var png = new PNG({
@@ -112,7 +115,6 @@ var png = new PNG({
     height: h,
     filterType: -1
 });
-
 
 for (var y = 0; y < png.height; y++) {
     for (var x = 0; x < png.width; x++) {
@@ -122,10 +124,6 @@ for (var y = 0; y < png.height; y++) {
         png.data[idx+2] = 40; // blue
         png.data[idx+3] = 0; // alpha (0 is transparent)
     }
-}
-
-function rgbToH(r, g, b) {
-  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
 function colorBrick(c,r,rgb){
@@ -142,6 +140,21 @@ function colorBrick(c,r,rgb){
   }
 }
 
+
+for (let r = 0; r < num_rows; r++) {
+  for (let c = 0; c < num_cols;  c++){
+    rgb = hexToRgb(frame[r][c])
+    colorBrick(c,r,rgb)
+  }
+}
+png.pack().pipe(fs.createWriteStream(`${name}/${i}.png`));
+
+
+}
+return null;
+}
+
+
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if(result){
@@ -155,18 +168,6 @@ function hexToRgb(hex) {
 }
 
 
-for (let r = 0; r < num_rows; r++) {
-  for (let c = 0; c < num_cols;  c++){
-    rgb = hexToRgb(frame[r][c])
-    colorBrick(c,r,rgb)
-  }
-}
-
-if (!fs.existsSync('pngs_container')){
-  fs.mkdirSync('pngs_container')
-}
-png.pack().pipe(fs.createWriteStream(`pngs_container/${name}_${speed}_${i}.png`));
-
-}
-return null;
+function rgbToH(r, g, b) {
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }

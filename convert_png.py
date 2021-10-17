@@ -1,18 +1,18 @@
 from PIL import Image
 import glob
 import os
-print("insid python!")
+import sys
 
 # Create the frames
 
 frames = []
-imgs = glob.glob("pngs_container/*.png")
-name = imgs[1].split("/")[1].split("_")[0]
-speed = int(imgs[1].split("/")[1].split("_")[-2])
+name = sys.argv[1]
+speed = int(sys.argv[2])
+imgs = glob.glob(f"{name}/*.png")
 
 for i in range(len(imgs)):
-    fn = f"pngs_container/{name}_{speed}_{i}.png"
-    new_frame = Image.open(f"pngs_container/{name}_{speed}_{i}.png")
+    fn = f"{name}/{i}.png"
+    new_frame = Image.open(fn)
     frames.append(new_frame)
     os.remove(fn)
 
@@ -22,3 +22,5 @@ frames[0].save(f"extracted_gifs/{name}.gif", format='GIF',
                append_images=frames[1:],
                save_all=True,
                duration=speed, loop=0)
+
+os.rmdir(name)
