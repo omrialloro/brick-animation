@@ -849,9 +849,8 @@ function deleteColor(id){
 
 //'http://localhost:3000/gif'
 document.querySelector(".extract.save_btn").addEventListener("click", function(){
-  // const name = window.prompt("enter gif name")
-  name = String(Date.now())
-
+  const prefix = window.prompt("enter gif name")
+  name = prefix+String(Date.now())
   data = {"name":name,"speed":Math.round(time_ms),"data": renderAnimation()}
   fetch(port + '/gif', {
     method: 'POST', // or 'PUT'
@@ -863,10 +862,13 @@ document.querySelector(".extract.save_btn").addEventListener("click", function()
 
   aaa =  document.createElement(`a`);
   aaa.href = port+`/download/${name}`
-  setTimeout(()=> {
-    console.log(aaa.href)
-    aaa.click()
-  }, 40000);
+  console.log(aaa.href)
+  aaa.click()
+  //
+  // setTimeout(()=> {
+  //   console.log(aaa.href)
+  //   aaa.click()
+  // }, 1);
 
 
 })

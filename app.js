@@ -28,8 +28,29 @@ app.get('/check',function (req,res){
 )
 
 app.get('/download/:filename', (req,res)=>{
-  const filename = req.params.filename
-  res.download(`extracted_gifs/${filename}.gif`)
+  let filename = req.params.filename
+  gif_path = `extracted_gifs/${filename}.gif`
+  const intervalObj = setInterval(function() {
+
+      let file = gif_path;
+      let fileExists = fs.existsSync(file);
+
+      console.log('Checking for: ', file);
+      console.log('Exists: ', fileExists);
+
+      if (fileExists) {
+          clearInterval(intervalObj);
+          setTimeout(()=>{res.download(gif_path);
+          console.log("READY")
+
+          },5000)
+          // setTimeout(()=>{fs.unlinkSync(gif_path)},10000)
+      }
+  }, 2000);
+
+
+  //
+  // res.download(`extracted_gifs/${filename}.gif`)
   // setTimeout(()=>{
   //   fs.unlinkSync(`extracted_gifs/${filename}.gif`)
   // },10000)
