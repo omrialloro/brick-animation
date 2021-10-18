@@ -352,8 +352,12 @@ function stopAnimation(){
   }
   frames_handle = [];
 }
+// document.querySelector(".button_create.reset").addEventListener("click", function() {
+//   resetAnimation()
+// })
 
-document.querySelector(".mp_button.reset").addEventListener("click", function() {
+
+document.querySelector(".button_create.reset").addEventListener("click", function() {
   resetAnimation()
 })
 

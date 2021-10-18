@@ -38,7 +38,7 @@ width: 250px;
 display: inline;
 }
 
-nav h2 {
+.info_btn h3 {
 top: 0;
 left: 0;
 width: 40px;
@@ -54,6 +54,44 @@ border-radius: 50%;
 border: 1px solid black;
 }
 
+.info_btn:hover .information {
+  visibility: visible;
+}
+
+.information {
+  visibility: hidden;
+  background-color: #000;
+    color: greenyellow;
+    margin: 10px 20px;
+    width: 70vw;
+    padding: 10px;
+    transform: translateY(100px);
+    border: 4px solid #84ff00;
+
+}
+
+.information h2 {
+  color: #89ff00;
+    font-size: 48px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+ .information p {
+   font-size: 16px;
+    line-height: 1.5;
+    margin: 0;;
+ }
+
+span {
+  font-size: 24px;
+    margin-right: 10px;
+    background-color: #ff002c;
+    color: #000;}
+
+strong {
+  font-weight: 600;
+}
 .interface {
   margin-left: 50px;
 }
@@ -93,7 +131,7 @@ border: 1px solid black;
   flex-wrap: wrap;
   align-items: center;
   height: 110px;
-  width: 14vh;
+  width: 16vh;
 }
 
 
@@ -101,7 +139,7 @@ border: 1px solid black;
   height: 4.5vh;
   width: 4.5vh;
   background-color: #f7b947;
-  filter: drop-shadow(1px 1px 10px #f7b947);
+  /* filter: drop-shadow(1px 1px 10px #f7b947); */
   border-radius: 50%;
   text-align: center;
   line-height: 4.5vh;
@@ -194,7 +232,7 @@ main {
 
 .action {
   height: 84vh;
-  width: 14vh;
+  width: 18vh;
   margin:0 15px;
 }
 
@@ -338,7 +376,7 @@ button {
 
 .media_player {
   display: flex;
-justify-content: space-between;
+justify-content: center;
 align-content: center;
 height: 5.5vh;
 width: 14vh;
@@ -346,11 +384,12 @@ margin: 3.6vh 0;
 }
 
 .mp_button {
-  height: 4vh;
-  width: 4vh;
+  height: 5vh;
+  width: 5vh;
   border-radius: 50%;
   background-color: #9DF49D;
   border: 1px solid #000;
+  margin:5px;
 }
 
 .fps_btns {
@@ -444,5 +483,23 @@ margin: 3.6vh 0;
 
   /* Show the tooltip text when you mouse over the tooltip container */
   .msg:hover .tooltiptext {
+    visibility: visible;
+
+  }
+
+  .ctrl_z {
+    visibility: hidden;
+    width: 80px;
+    display: inline;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 5px ;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+  }
+    .undo:hover {
     visibility: visible;
   }

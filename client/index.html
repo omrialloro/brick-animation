@@ -7,7 +7,24 @@
 <body>
 <nav>
   <h1>shape animation</h1>
-  <h2> i </h2>
+
+<div class="info_btn">
+  <h3> i </h3>
+  <div class="information">
+    <h2>Make a wicked animation by changing the color of the bricks in each frame:<br> - Select a color, then select one of the shape options to paint a specific area of bricks. <br> - Press enter or click the plus icon to generate a new frame.  </h2>
+    <hr>
+    <strong><p>Keyboard shortcuts:</p></strong>
+    <br>
+    <p><span>&#9166;</span>  create a new frame </p>
+    <p><span>&#8984;+ Z </span> undo </p>
+    <p> <span> &#8593; </span>move all bricks one row up </p>
+    <p> <span>&#8595; </span>move all bricks one row down </p>
+    <p>  <span>&#8592;  </span>move all bricks one column left </p>
+    <p> <span>&#8594;  </span>move all bricks one column right </p>
+    <p>  <span>&blank; </span>play/stop animation </p>
+  </div>
+</div>
+
 </nav>
 <div class="interface">
 
@@ -124,18 +141,19 @@
             <p>12</p>
           </div>
         </div>
-        <div class="creation_btns" style="z-index:0;">
-            <div class="msg">
+        <div class="creation_btns">
+          <span class="ctrl_z"> &#9166; Enter </span>
             <div class="button_create undo">
-                 <img src="undo.svg">
-                 <span class="tooltiptext"> ctrl+z</span>
-              </div>
+                   <img src="undo.svg">
              </div>
             <div class="button_create reverse">
               <img src="reverse.svg">
              </div>
               <div class="button_create clear">
                 <img src="clear.svg">
+              </div>
+              <div class="button_create reset">
+                  <img src="reset.svg">
               </div>
             <div class="button_create button_create_grd">
             grd
@@ -192,9 +210,9 @@
         <div class="mp_button loop">
             <img src="loop.svg">
         </div>
-        <div class="mp_button reset">
+        <!-- <div class="mp_button reset">
             <img src="reset.svg">
-        </div>
+        </div> -->
 
       </div>
 
@@ -216,7 +234,7 @@
      </div>
 
      <div class="make_gif">
-      <div class="extract save_btn"> <h3> convert to GIF </h3> </div>
+      <div class="extract save_btn"> <h3> extract to GIF </h3> </div>
      </div>
 
      <div class="save_buttons">
