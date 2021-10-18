@@ -38,6 +38,22 @@ width: 250px;
 display: inline;
 }
 
+nav h2 {
+top: 0;
+left: 0;
+width: 40px;
+height: 40px;
+transform: translate(20px, 60px);
+line-height: 36px;
+font-size: 36px;
+font-weight: 600;
+font-family: 'Baloo Bhai';
+background-color: white;
+text-align: center;
+border-radius: 50%;
+border: 1px solid black;
+}
+
 .interface {
   margin-left: 50px;
 }
@@ -66,6 +82,7 @@ display: inline;
 
 .newframe_btn
 {
+  cursor: pointer;
   width: 50px;
   height: 50px;
 }
@@ -89,6 +106,8 @@ display: inline;
   text-align: center;
   line-height: 4.5vh;
   font-size: 2vh;
+  cursor: pointer;
+
 }
 
 .errows {
@@ -98,6 +117,7 @@ display: inline;
   align-items: center;
   height: 80px;
   width: 14vh;
+  cursor: pointer;
 }
 
 .button_errows {
@@ -248,6 +268,7 @@ color: #fff;
 padding: 10px;
 margin-bottom: 10px;
 border-radius: 5px;
+cursor: pointer;
 }
 
 
@@ -368,8 +389,8 @@ margin: 3.6vh 0;
 }
 .save_btn {
     background-color: #CEB0D1;
-    width: 4vh;
-    height: 4vh;
+    width: 6vh;
+    height: 6vh;
     border-radius: 15%;
     border: 2px solid #000;
 }
@@ -380,3 +401,48 @@ margin: 3.6vh 0;
     height: 7vh;
     width: 14vh;
 }
+
+.make_gif {
+  height: 10vh;
+  cursor: pointer;
+}
+
+.extract {
+    width: 14vh;
+    border-radius: 0;
+    background-color: #f4261e;
+  }
+
+  .extract h3 {
+    font-size: 16px;
+    line-height: 6vh;
+    text-align: center;
+
+  }
+
+
+  .msg {
+    position: relative;
+    cursor: pointer;
+
+  }
+
+  /* Tooltip text */
+  .tooltiptext {
+    visibility: hidden;
+    width: 80px;
+    display: inline;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 5px ;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .msg:hover .tooltiptext {
+    visibility: visible;
+  }

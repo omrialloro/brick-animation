@@ -864,13 +864,6 @@ document.querySelector(".extract.save_btn").addEventListener("click", function()
   aaa.href = port+`/download/${name}`
   console.log(aaa.href)
   aaa.click()
-  //
-  // setTimeout(()=> {
-  //   console.log(aaa.href)
-  //   aaa.click()
-  // }, 1);
-
-
 })
 
 
@@ -1014,33 +1007,27 @@ function create_bool_array(){
 
   }
 
-  document.body.onkeyup = function(e){
-      if(e.keyCode == 37){
-        e.preventDefault();
-        if (current_frame>1){
-          current_frame -= 1
-        }
-        else{
-          current_frame = frames.length;
-        }
-        updateFrame()
-      }
-  }
-  document.body.onkeyup = function(e){
-      if(e.keyCode == 82){
-        e.preventDefault();
-        current_frame = frames.length
-        updateFrame()
-      }
-  }
+  command_on = false
 
-  document.body.onkeyup = function(e){
-      if(e.keyCode == 40){
-        e.preventDefault();
-        current_frame = 1
-        updateFrame()
+  document.addEventListener("keydown", (e) => {
+    if(e.keyCode == 91){
+      command_on = true
+      command_event =  setTimeout(()=>{
+        command_on = false
+      },1000)
+    }
+    else if (e.keyCode == 90) {
+      if (command_on){
+        clearTimeout(command_event)
+        Undo()
+        command_on = true
+        command_event =  setTimeout(()=>{
+          command_on = false
+        },1000)
+
       }
-  }
+    }
+})
 
   document.body.onkeyup = function(e){
       if(e.keyCode == 13){

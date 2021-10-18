@@ -11,7 +11,6 @@ app = express()
 app.use(express.json({limit: '25mb'}));
 
 app.use(express.static('public'))
-// app.use(express.json({limit:'1mb'}))
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
@@ -42,18 +41,10 @@ app.get('/download/:filename', (req,res)=>{
           clearInterval(intervalObj);
           setTimeout(()=>{res.download(gif_path);
           console.log("READY")
-
           },5000)
           // setTimeout(()=>{fs.unlinkSync(gif_path)},10000)
       }
   }, 2000);
-
-
-  //
-  // res.download(`extracted_gifs/${filename}.gif`)
-  // setTimeout(()=>{
-  //   fs.unlinkSync(`extracted_gifs/${filename}.gif`)
-  // },10000)
 })
 
 app.get('/api/sessions', function (req, res) {
@@ -96,12 +87,38 @@ app.post('/gif',(request, response)=>{
   var speed = data_str["speed"]
   console.log(`speed ${speed}`)
   var frames = data_str["data"]
-
+  let l = frames.length
+  console.log(l)
   xoxox = makePngs(name,speed,frames)
-  // spawn('python3', ['convert_png.py'])
+  tt = fs.readdirSync(name)
+  console.log(tt.length)
+  t = 20
+  setTimeout(()=>{console.log(tt.length)},t)
+  setTimeout(()=>{console.log(tt.length)},t*2)
+  setTimeout(()=>{console.log(tt.length)},t*3)
+
+
+
+
   if (!fs.existsSync('extracted_gifs')){
     fs.mkdirSync('extracted_gifs')
   }
+  const intervalObj = setInterval(function() {
+
+      let file = gif_path;
+      let fileExists = fs.existsSync(file);
+
+      console.log('Checking for: ', file);
+      console.log('Exists: ', fileExists);
+
+      if (fileExists) {
+          clearInterval(intervalObj);
+          setTimeout(()=>{res.download(gif_path);
+          console.log("READY")
+          },5000)
+          // setTimeout(()=>{fs.unlinkSync(gif_path)},10000)
+      }
+  }, 2000);
 
 
   setTimeout(() => { spawn('python3', ['convert_png.py',name, speed]); }, 20000);
@@ -174,7 +191,6 @@ png.pack().pipe(fs.createWriteStream(`${name}/${i}.png`));
 }
 return null;
 }
-
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
