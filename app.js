@@ -29,23 +29,46 @@ app.get('/check',function (req,res){
 app.get('/download/:filename', (req,res)=>{
   let filename = req.params.filename
   gif_path = `extracted_gifs/${filename}.gif`
+  let is_ready = false
   const intervalObj = setInterval(function() {
 
       let file = gif_path;
       let fileExists = fs.existsSync(file);
+      if (fileExists){
+        is_ready = fs.statSync(gif_path).size>100
+      }
+      console.log("is exists:"+fileExists)
+      console.log("is ready:"+is_ready)
 
-      console.log('Checking for: ', file);
-      console.log('Exists: ', fileExists);
-
-      if (fileExists) {
+      if (is_ready) {
           clearInterval(intervalObj);
           setTimeout(()=>{res.download(gif_path);
           console.log("READY")
-          },5000)
+          },4000)
           // setTimeout(()=>{fs.unlinkSync(gif_path)},10000)
       }
   }, 2000);
 })
+
+function checkFilesReady(name,num_files){
+  files = fs.readdirSync(name)
+  if (files.length!=num_files){
+    return false
+  }
+  else {
+    is_ready = true
+    tot_size = 0
+    for(let i=0; i<num_files; i++){
+      let stat = fs.statSync(name+"/"+files[i])
+      tot_size += stat.size
+      if (stat.size<10){
+        is_ready = false
+      }
+    }
+    console.log(tot_size)
+    return is_ready
+  }
+}
 
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
@@ -62,6 +85,16 @@ app.get('/api/sessions', function (req, res) {
 app.get('/api/:filename', function (req, res) {
   const filename = req.params.filename
   var data = fs.readFileSync(`saved_sessions/${filename}.json`)
+  var data_str = JSON.parse(data)
+  res.send(data_str)
+
+})
+
+app.get('/demo', function (req, res) {
+  // const filename = req.params.filename
+  // var data = fs.readFileSync(`saved_sessions/${filename}.json`)
+  var data = fs.readFileSync(`demo.json`)
+
   var data_str = JSON.parse(data)
   res.send(data_str)
 
@@ -87,44 +120,45 @@ app.post('/gif',(request, response)=>{
   var speed = data_str["speed"]
   console.log(`speed ${speed}`)
   var frames = data_str["data"]
-  let l = frames.length
-  console.log(l)
-  xoxox = makePngs(name,speed,frames)
-  tt = fs.readdirSync(name)
-  console.log(tt.length)
-  t = 20
-  setTimeout(()=>{console.log(tt.length)},t)
-  setTimeout(()=>{console.log(tt.length)},t*2)
-  setTimeout(()=>{console.log(tt.length)},t*3)
-
-
-
+  let num_files = frames.length
+  console.log(num_files)
+  makePngs(name,speed,frames)
+  console.log("exit makePngs")
 
   if (!fs.existsSync('extracted_gifs')){
     fs.mkdirSync('extracted_gifs')
   }
-  const intervalObj = setInterval(function() {
 
-      let file = gif_path;
-      let fileExists = fs.existsSync(file);
-
-      console.log('Checking for: ', file);
-      console.log('Exists: ', fileExists);
-
-      if (fileExists) {
-          clearInterval(intervalObj);
-          setTimeout(()=>{res.download(gif_path);
-          console.log("READY")
-          },5000)
-          // setTimeout(()=>{fs.unlinkSync(gif_path)},10000)
-      }
-  }, 2000);
-
-
-  setTimeout(() => { spawn('python3', ['convert_png.py',name, speed]); }, 20000);
   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });
+
+let counter = 0
+  const intervalObj = setInterval(function() {
+    counter +=1
+    console.log("counter is" +counter)
+      let is_ready = checkFilesReady(name, num_files)
+      console.log("is_ready: "+ is_ready)
+      if (is_ready&&counter>10) {
+        clearInterval(intervalObj);
+        setTimeout(()=>{
+          console.log("files are ready")
+          console.log('calling python...');
+          spawn('python3', ['convert_png.py',name, speed])
+        },3000)
+      }
+  }, 500);
+
+// const tmot = setTimeout(()=>{
+//   // console.log("suspicious!")
+//   console.log('calling python...');
+//
+//   // clearInterval(intervalObj);
+//   spawn('python3', ['convert_png.py',name, speed])
+// },5000)
+//   fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
+//   if (err) return console.log(err);
+//   });
 })
 
 
@@ -203,7 +237,6 @@ function hexToRgb(hex) {
   }
   return null;
 }
-
 
 function rgbToH(r, g, b) {
   return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);

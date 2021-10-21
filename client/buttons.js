@@ -24,9 +24,59 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-// let port = "http://localhost:3000"
+let port = "http://localhost:3000"
 
-let port = "http://3.69.98.116:3000"
+// let port = "http://3.69.98.116:3000"
+
+
+
+
+let action_right = document.querySelector(".action.right")
+let action_left = document.querySelector(".action.left")
+let timeline = document.querySelector(".timeline")
+let nav = document.querySelector("nav")
+
+
+
+// console.log(action.style)
+action_left.style.visibility = "hidden"
+action_right.style.visibility = "hidden"
+timeline.style.visibility = "hidden"
+nav.style.visibility = "hidden"
+
+
+let time_for_demo = 0;
+
+  async function playDemo(){
+    let data =  await fetch(port + `/demo`, {method: 'GET' }).then(res => res.json())
+    rendered_frames = data.data
+    time_ms =data.speed
+    run_rendered_frames(rendered_frames)
+    time_for_demo = rendered_frames.length*time_ms
+    return time_for_demo
+    // console.log(data.data)
+  }
+  time_for_demo=  playDemo()
+  setTimeout(()=>{
+    console.log(time_for_demo)
+    setTimeout(()=>{
+      action_left.style.visibility = "visible"
+      action_right.style.visibility = "visible"
+      timeline.style.visibility = "visible"
+      nav.style.visibility = "visible"
+
+      state_array = []
+      CreateStateArray()
+      set_configuration(state_array)
+      // document.querySelector(".button_create.clear").click()
+
+    },time_for_demo)
+
+  },1000)
+  console.log(time_for_demo)
+
+
+// let port = "http://3.69.98.116:3000"
 // let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
 
 
@@ -299,6 +349,7 @@ document.querySelector(".play").addEventListener("click", function(){
 
 function handlePlay(){
   num_frames = frames.length
+
   let total_animation_time = num_frames*time_ms;
   if (is_play){
     stopAnimation()
@@ -412,6 +463,17 @@ function set_configuration_with_frame_index(frame, index){
     }
   }
 }
+
+function set_configuration_rendered(frame){
+  for (let c = 0; c < num_column; c++){
+    for (let r = 0; r < num_rows; r++){
+      let x = document.getElementById(`${c}_${r}`)
+      x.style.backgroundColor = frame[r][c];
+      // x.innerHTML = ``
+    }
+  }
+}
+
 function copyFrame(ref_frame){
   let fame_copy = [];
   for (let i = 0; i < num_rows; i++) {
@@ -441,6 +503,22 @@ function copyFrame(ref_frame){
     }
     return num_frames_;
   }
+
+  function run_rendered_frames(rendered_frames){
+    current_frame = Math.min(current_frame,frames.length)
+    let num_frames_ = rendered_frames.length - current_frame ;
+    current_frame_ = current_frame
+    for (let i = 0; i < rendered_frames.length - current_frame ; i++){
+      s = setTimeout(function() {
+        j  = i + current_frame_
+        set_configuration_rendered(rendered_frames[j]);
+        // document.querySelector('.newframe_count').innerHTML = `<h3>${j}</h3>`;
+        current_frame = j;
+        document.getElementById('frame_slider').value = j;
+      },i*time_ms );
+    }
+  }
+
 
 
 function run_all_frames(){
@@ -822,6 +900,8 @@ function CreatAnimationColor(n,id){
   bb.style.border = `2px solid #000`;
   bb.style.textAlign = 'center'
   // bb.draggable= true;
+
+
   // bb.innerHTML = `<h2>${n}</h2>`
   bb.addEventListener('dragstart', drag, false);
   document.querySelector(".pattern_selector").appendChild(bb);
