@@ -24,54 +24,54 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-let port = "http://localhost:4000"
+// let port = "http://localhost:4000"
 
-// let port = "http://3.69.98.116:3000"
+let port = "http://3.69.98.116:3000"
 
-//
-// let action_right = document.querySelector(".action.right")
-// let action_left = document.querySelector(".action.left")
-// let timeline = document.querySelector(".timeline")
-// let nav = document.querySelector("nav")
-//
-//
-// // console.log(action.style)
-// action_left.style.visibility = "hidden"
-// action_right.style.visibility = "hidden"
-// timeline.style.visibility = "hidden"
-// nav.style.visibility = "hidden"
 
-//
-// let time_for_demo = 0;
-//
-//   async function playDemo(){
-//     let data =  await fetch(port + `/demo`, {method: 'GET' }).then(res => res.json())
-//     rendered_frames = data.data
-//     time_ms =data.speed
-//     run_rendered_frames(rendered_frames)
-//     time_for_demo = rendered_frames.length*time_ms
-//     return time_for_demo
-//     // console.log(data.data)
-//   }
-//   time_for_demo=  playDemo()
-//   setTimeout(()=>{
-//     console.log(time_for_demo)
-//     setTimeout(()=>{
-//       action_left.style.visibility = "visible"
-//       action_right.style.visibility = "visible"
-//       timeline.style.visibility = "visible"
-//       nav.style.visibility = "visible"
-//
-//       state_array = []
-//       CreateStateArray()
-//       set_configuration(state_array)
-//       time_ms = 1000/fps;
-//       current_frame = 0;
-//       // document.querySelector(".button_create.clear").click()
-//
-//     },time_for_demo)
-//
-//   },1000)
+let action_right = document.querySelector(".action.right")
+let action_left = document.querySelector(".action.left")
+let timeline = document.querySelector(".timeline")
+let nav = document.querySelector("nav")
+
+
+// console.log(action.style)
+action_left.style.visibility = "hidden"
+action_right.style.visibility = "hidden"
+timeline.style.visibility = "hidden"
+nav.style.visibility = "hidden"
+
+
+let time_for_demo = 0;
+
+  async function playDemo(){
+    let data =  await fetch(port + `/demo`, {method: 'GET' }).then(res => res.json())
+    rendered_frames = data.data
+    time_ms =data.speed
+    run_rendered_frames(rendered_frames)
+    time_for_demo = rendered_frames.length*time_ms
+    return time_for_demo
+    // console.log(data.data)
+  }
+  time_for_demo=  playDemo()
+  setTimeout(()=>{
+    console.log(time_for_demo)
+    setTimeout(()=>{
+      action_left.style.visibility = "visible"
+      action_right.style.visibility = "visible"
+      timeline.style.visibility = "visible"
+      nav.style.visibility = "visible"
+
+      state_array = []
+      CreateStateArray()
+      set_configuration(state_array)
+      time_ms = 1000/fps;
+      current_frame = 0;
+      // document.querySelector(".button_create.clear").click()
+
+    },time_for_demo)
+
+  },1000)
 //   console.log(time_for_demo)
 //
 
