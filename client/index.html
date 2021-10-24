@@ -17,10 +17,10 @@
     <br>
     <p><span>&#9166;</span>  create a new frame </p>
     <p><span>&#8984;+ Z </span> undo </p>
-    <p> <span> &#8593; </span>move all bricks one row up </p>
-    <p> <span>&#8595; </span>move all bricks one row down </p>
-    <p>  <span>&#8592;  </span>move all bricks one column left </p>
-    <p> <span>&#8594;  </span>move all bricks one column right </p>
+    <p> <span> &#8593; </span>Shift all bricks one row up </p>
+    <p> <span>&#8595; </span>Shift all bricks one row down </p>
+    <p>  <span>&#8592;  </span>Shift all bricks one column left </p>
+    <p> <span>&#8594;  </span>Shift all bricks one column right </p>
     <p>  <span>&blank; </span>play/stop animation </p>
   </div>
 </div>
@@ -133,33 +133,58 @@
           <div class="newframe_btn">
             <div class="msg">
               <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49"><defs><style>.cls-1{fill:red;}</style></defs><polygon class="cls-1" points="49 21 28 21 28 0 21 0 21 21 0 21 0 28 21 28 21 49 28 49 28 28 49 28 49 21"/></svg>
-              <span class="tooltiptext"> &#9166; Enter</span>
+              <span class="tooltiptext"> Create new frame (&#9166;)</span>
             </div>
 
           </div>
           <div class="newframe_count">
-            <p>12</p>
+            <p>New frame</p>
           </div>
         </div>
         <div class="creation_btns">
           <span class="ctrl_z"> &#9166; Enter </span>
             <div class="button_create undo">
-                   <img src="undo.svg">
+              <div class="msg">
+                <img src="undo.svg">
+                <span class="tooltiptext"> Undo (&#8984;+Z)</span>
+              </div>
+
              </div>
             <div class="button_create reverse">
-              <img src="reverse.svg">
+              <div class="msg">
+                <img src="reverse.svg">
+                <span class="tooltiptext"> Reverse</span>
+              </div>
+
              </div>
               <div class="button_create clear">
-                <img src="clear.svg">
+                <div class="msg">
+                      <img src="clear.svg">
+                  <span class="tooltiptext"> Clear current frame</span>
+                </div>
+
               </div>
               <div class="button_create reset">
-                  <img src="reset.svg">
+                <div class="msg">
+                  <!-- <img src="reset.svg"> -->
+                 reset
+                 <span class="tooltiptext"> Clear all frames</span>
+                </div>
+
               </div>
             <div class="button_create button_create_grd">
-            grd
+              <div class="msg">
+                  grd
+                <span class="tooltiptext"> Create a gredient </span>
+              </div>
+
              </div>
             <div class="button_create button_create_ocs">
+              <div class="msg">
                 ocs
+                <span class="tooltiptext"> Create an Ocsilator </span>
+              </div>
+
              </div>
         </div>
         <div class="errows">
@@ -167,7 +192,7 @@
             <div class="button_errows up">
               <div class="msg">
                 <img src="up.svg">
-                <span class="tooltiptext">		&#8593; Up key</span>
+                <span class="tooltiptext">	Shift up (&#8593;)</span>
               </div>
             </div>
           </div>
@@ -175,21 +200,21 @@
             <div class="button_errows left">
                 <div class="msg">
                 <img src="left.svg">
-                <span class="tooltiptext">	&#8592; Left key </span>
+                <span class="tooltiptext">	Shift left (&#8592;) </span>
                 </div>
              </div>
 
              <div class="button_errows down">
                 <div class="msg">
                   <img src="down.svg">
-                  <span class="tooltiptext"> 	&#8595; Down key</span>
+                  <span class="tooltiptext"> 	Shift down(&#8595;)</span>
                 </div>
               </div>
 
             <div class="button_errows right">
               <div class="msg">
                 <img src="right.svg">
-                <span class="tooltiptext">	&#8594; Right key</span>
+                <span class="tooltiptext">Shift right (&#8594;)</span>
               </div>
              </div>
 
@@ -204,11 +229,15 @@
         <div class="mp_button play">
             <div class="msg">
               <img src="play.svg">
-              <span class="tooltiptext">  &blank; space </span>
+              <span class="tooltiptext">  play / stop (&blank;) </span>
             </div>
         </div>
         <div class="mp_button loop">
+          <div class="msg">
             <img src="loop.svg">
+            <span class="tooltiptext">  Loop </span>
+          </div>
+
         </div>
         <!-- <div class="mp_button reset">
             <img src="reset.svg">
@@ -218,7 +247,11 @@
 
      <div class="fps_btns">
        <div class="fps_plus">
-        +
+         <div class="msg">
+           +
+           <span class="tooltiptext">  Faster!! </span>
+         </div>
+
        </div>
 
        <div class="fps_count_co">
@@ -228,7 +261,10 @@
          <p>FPS</p>
        </div>
       <div class="fps_minus">
-        -
+        <div class="msg">
+          -
+          <span class="tooltiptext">  Slower!! </span>
+        </div>
       </div>
 
      </div>
@@ -239,7 +275,11 @@
 
      <div class="save_buttons">
        <div class="save save_btn">
-          <img src="save.svg">
+         <div class="msg">
+            <img src="save.svg">
+            <span class="tooltiptext">  Save </span>
+         </div>
+
        </div>
 
        <!-- <div class="extract save_btn">
@@ -247,7 +287,11 @@
        </div> -->
 
        <div class="load save_btn">
-            <img src="save_temp.svg">
+         <div class="msg">
+           <img src="save_temp.svg">
+           <span class="tooltiptext">  Load </span>
+         </div>
+
        </div>
 
      </div>

@@ -23,6 +23,7 @@ console.log("listening to port 3000")
 
 app.get('/check',function (req,res){
   console.log("running")
+  res.send("ok")
 }
 )
 
@@ -69,6 +70,9 @@ function checkFilesReady(name,num_files){
     return is_ready
   }
 }
+// app.get('/check', function (req, res) {
+//   res.send("ok")
+// })
 
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
@@ -97,7 +101,6 @@ app.get('/demo', function (req, res) {
 
   var data_str = JSON.parse(data)
   res.send(data_str)
-
 })
 
 app.post('/api',(request, response)=>{

@@ -24,57 +24,56 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-// let port = "http://localhost:3000"
+let port = "http://localhost:4000"
 
-let port = "http://3.69.98.116:3000"
+// let port = "http://3.69.98.116:3000"
 
+//
+// let action_right = document.querySelector(".action.right")
+// let action_left = document.querySelector(".action.left")
+// let timeline = document.querySelector(".timeline")
+// let nav = document.querySelector("nav")
+//
+//
+// // console.log(action.style)
+// action_left.style.visibility = "hidden"
+// action_right.style.visibility = "hidden"
+// timeline.style.visibility = "hidden"
+// nav.style.visibility = "hidden"
 
-
-
-let action_right = document.querySelector(".action.right")
-let action_left = document.querySelector(".action.left")
-let timeline = document.querySelector(".timeline")
-let nav = document.querySelector("nav")
-
-
-
-// console.log(action.style)
-action_left.style.visibility = "hidden"
-action_right.style.visibility = "hidden"
-timeline.style.visibility = "hidden"
-nav.style.visibility = "hidden"
-
-
-let time_for_demo = 0;
-
-  async function playDemo(){
-    let data =  await fetch(port + `/demo`, {method: 'GET' }).then(res => res.json())
-    rendered_frames = data.data
-    time_ms =data.speed
-    run_rendered_frames(rendered_frames)
-    time_for_demo = rendered_frames.length*time_ms
-    return time_for_demo
-    // console.log(data.data)
-  }
-  time_for_demo=  playDemo()
-  setTimeout(()=>{
-    console.log(time_for_demo)
-    setTimeout(()=>{
-      action_left.style.visibility = "visible"
-      action_right.style.visibility = "visible"
-      timeline.style.visibility = "visible"
-      nav.style.visibility = "visible"
-
-      state_array = []
-      CreateStateArray()
-      set_configuration(state_array)
-      // document.querySelector(".button_create.clear").click()
-
-    },time_for_demo)
-
-  },1000)
-  console.log(time_for_demo)
-
+//
+// let time_for_demo = 0;
+//
+//   async function playDemo(){
+//     let data =  await fetch(port + `/demo`, {method: 'GET' }).then(res => res.json())
+//     rendered_frames = data.data
+//     time_ms =data.speed
+//     run_rendered_frames(rendered_frames)
+//     time_for_demo = rendered_frames.length*time_ms
+//     return time_for_demo
+//     // console.log(data.data)
+//   }
+//   time_for_demo=  playDemo()
+//   setTimeout(()=>{
+//     console.log(time_for_demo)
+//     setTimeout(()=>{
+//       action_left.style.visibility = "visible"
+//       action_right.style.visibility = "visible"
+//       timeline.style.visibility = "visible"
+//       nav.style.visibility = "visible"
+//
+//       state_array = []
+//       CreateStateArray()
+//       set_configuration(state_array)
+//       time_ms = 1000/fps;
+//       current_frame = 0;
+//       // document.querySelector(".button_create.clear").click()
+//
+//     },time_for_demo)
+//
+//   },1000)
+//   console.log(time_for_demo)
+//
 
 // let port = "http://3.69.98.116:3000"
 // let port = "ec2-3-69-98-116.eu-central-1.compute.amazonaws.com:3000"
@@ -94,11 +93,11 @@ const bckColor = "#383636"
 paint_state = 0
 
 let color_dict  = {
-  0:(r,c)=>'#cb9d06',
+  0:(r,c)=>'#171616',
   1:(r,c)=>'#B51F1F',
   2:(r,c)=>'#cb4406',
-  3:(r,c)=>'#171616',
-  4:(r,c)=>'#F3F1E0',
+  3:(r,c)=>'#F3F1E0',
+  4:(r,c)=>'#cb9d06 ',
   5:(r,c)=>'#065684',
 }
 
@@ -109,9 +108,9 @@ color_dict[oscillator_col] = (r,c)=>cb(currentFrame())
 let color_dict2  = {
   0:'red',
   1:'blue',
-  2:'yellow',
+  2:'white',
   3:'black',
-  4:'white',
+  4:'Yellow',
   5:'magenta',
 }
 
@@ -149,6 +148,23 @@ function createDataDict(){
 }
 
 let data_dict = createDataDict();
+
+ async function CheckServer(){
+   is_on = true
+  let xx = await fetch(port+`/check`, {method: 'GET' }).then(res => res)
+  console.log(xx)
+  try {
+    let xx = await fetch(port+`/check`, {method: 'GET' }).then(res => res)
+    console.log("server on")
+  }
+  catch {
+    console.log("server is off")
+    is_on = false
+  }
+  return is_on
+}
+
+// tttt = CheckServer()
 
 function MkColorsBtns(){
 
@@ -386,7 +402,7 @@ document.querySelector(".loop").addEventListener("click", function(){
   else {
     clearInterval(ttt)
     stopAnimation()
-    this.style.backgroundColor = "red"
+    this.style.backgroundColor = "#9DF49D"
     setTimeout(function(){
       is_play = !is_play;
       current_frame = 0;
@@ -936,6 +952,7 @@ document.querySelector(".extract.save_btn").addEventListener("click", function()
   const prefix = window.prompt("enter gif name")
   name = prefix+String(Date.now())
   data = {"name":name,"speed":Math.round(time_ms),"data": renderAnimation()}
+
   fetch(port + '/gif', {
     method: 'POST', // or 'PUT'
     headers: {
