@@ -102,35 +102,53 @@ let color_dict  = {
 }
 
 
+let color_dict1  = {
+  0:(r,c)=>'#171616',
+  1:(r,c)=>'#B51F1F',
+  2:(r,c)=>'#cb4406',
+  3:(r,c)=>'#F3F1E0',
+  4:(r,c)=>'#cb9d06 ',
+  5:(r,c)=>'#065684',
+}
+
+
 currentFrame = ()=>current_frame;
 color_dict[oscillator_col] = (r,c)=>cb(currentFrame())
 
 let color_dict2  = {
-  0:'red',
-  1:'blue',
-  2:'white',
-  3:'black',
-  4:'Yellow',
-  5:'magenta',
+  0:(r,c)=>'red',
+  1:(r,c)=>'blue',
+  2:(r,c)=>'white',
+  3:(r,c)=>'black',
+  4:(r,c)=>'Yellow',
+  5:(r,c)=>'magenta',
 }
 
-let color_dict8  = {
-  0:'#cb9d06',
-  1:'#B51F1F',
-  2:'#cb4406',
-  3:'#171616',
-  4:'#F3F1E0',
-  5:'#065684',
+let color_dict3  = {
+  0:(r,c)=>'#28b7ce',
+  1:(r,c)=>'#21c17c',
+  2:(r,c)=>'#e27940',
+  3:(r,c)=>'#1f286d',
+  4:(r,c)=>'#dd6cb8',
+  5:(r,c)=>'#f2e672',
 }
 
-let color_dict1  = {
-  0:'#ff0066',
-  1:'#006666',
-  2:'#cc3300',
-  3:'#997a00',
-  4:'#001a33',
-  5:'#FF9999',
+
+let color_dict4  = {
+  0:(r,c)=>'#4ba8e2',
+  1:(r,c)=>'#0b22b6',
+  2:(r,c)=>'#919191',
+  3:(r,c)=>'#2d2d2d',
+  4:(r,c)=>'#ffffff',
+  5:(r,c)=>'#f21449',
 }
+//
+// #28b7ce yellow (white)
+// #21c17c pink (red)
+// #e27940 dark blue (black)
+// #1f286d orange (yellow)
+// #dd6cb8 turkiz (orange)
+// #f2e672 light blue (blue)
 
 function createDataDict(){
   let data_dict = {}
@@ -484,7 +502,7 @@ function set_configuration_rendered(frame){
   for (let c = 0; c < num_column; c++){
     for (let r = 0; r < num_rows; r++){
       let x = document.getElementById(`${c}_${r}`)
-      x.style.backgroundColor = frame[r][c];
+      x.style.backgroundColor = frame[c][r];
       // x.innerHTML = ``
     }
   }
@@ -789,12 +807,21 @@ function handleFrameChange(e){
 
 function ChangeScheme(val){
 if (val=="default"){
-  color_dict = color_dict1
-
+  color_dict_ = color_dict1
+}
+else if (val =="caribean"){
+  color_dict_ = color_dict2
+}
+else if (val=="futuristic"){
+  color_dict_ = color_dict3
 }
 else {
-  color_dict = color_dict2
+  color_dict_ = color_dict4
 }
+for (let i=0;i<6;i++){
+  color_dict[i] = color_dict_[i]
+}
+
 }
 
 set_configuration(state_array)
@@ -879,7 +906,7 @@ function StoreAnimation(index){
   }
   Animations[index] = frames_;
 }
-//
+
 // function CreatAnimationButtons(n,id){
 //
 //   // let bb = document.createElement("action_buttons");

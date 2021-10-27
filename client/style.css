@@ -366,6 +366,7 @@ cursor: pointer;
 button {
   width: 2.8vh;
   height: 2.8vh;
+  border: 0.5px solid grey;
 }
 /*
 .brick {
