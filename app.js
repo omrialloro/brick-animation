@@ -95,10 +95,7 @@ app.get('/api/:filename', function (req, res) {
 })
 
 app.get('/demo', function (req, res) {
-  // const filename = req.params.filename
-  // var data = fs.readFileSync(`saved_sessions/${filename}.json`)
   var data = fs.readFileSync(`demo.json`)
-
   var data_str = JSON.parse(data)
   res.send(data_str)
 })
