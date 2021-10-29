@@ -13,8 +13,8 @@ const fs = require('fs')
 
 app = express()
 
-app.listen(500)
-console.log("listening to port 500")
+app.listen(5000)
+console.log("listening to port 5000")
 
 app.get('/check',function (req,res){
   console.log("running")
