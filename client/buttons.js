@@ -24,7 +24,7 @@ let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
 
-// let port = "http://localhost:4000"
+// let port = "http://localhost:3000"
 
 let port = "http://3.69.98.116:3000"
 
@@ -97,7 +97,7 @@ let color_dict  = {
   1:(r,c)=>'#B51F1F',
   2:(r,c)=>'#cb4406',
   3:(r,c)=>'#F3F1E0',
-  4:(r,c)=>'#cb9d06 ',
+  4:(r,c)=>'#cb9d06',
   5:(r,c)=>'#065684',
 }
 
@@ -107,7 +107,7 @@ let color_dict1  = {
   1:(r,c)=>'#B51F1F',
   2:(r,c)=>'#cb4406',
   3:(r,c)=>'#F3F1E0',
-  4:(r,c)=>'#cb9d06 ',
+  4:(r,c)=>'#cb9d06',
   5:(r,c)=>'#065684',
 }
 

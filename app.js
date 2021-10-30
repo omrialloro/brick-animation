@@ -115,23 +115,25 @@ app.post('/api',(request, response)=>{
 app.post('/gif',(request, response)=>{
   var data = JSON.stringify(request.body)
   var data_str = JSON.parse(data)
-
+  console.log("*******")
   var name = data_str["name"]
+  console.log("name is:" +name)
   var speed = data_str["speed"]
-  console.log(`speed ${speed}`)
+  console.log(`speed is:${speed}`)
   var frames = data_str["data"]
   let num_files = frames.length
-  console.log(num_files)
+  console.log("number of frames is:"+ num_files)
+
+  fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
+    if (err) return console.log(err);
+  });
+
   makePngs(name,speed,frames)
   console.log("exit makePngs")
-
   if (!fs.existsSync('extracted_gifs')){
     fs.mkdirSync('extracted_gifs')
   }
 
-  fs.writeFile(`extracted_gifs/${data_str["name"]}.json`, data, function (err) {
-  if (err) return console.log(err);
-  });
 
 let counter = 0
   const intervalObj = setInterval(function() {
@@ -162,11 +164,9 @@ let counter = 0
 })
 
 
-
 var spawn = require('child_process').spawn
 
 function makePngs(name,speed, frames){
-
 
 let margin = 0;
 let brick_dim = [10, 10];
