@@ -116,12 +116,12 @@ currentFrame = ()=>current_frame;
 color_dict[oscillator_col] = (r,c)=>cb(currentFrame())
 
 let color_dict2  = {
-  0:(r,c)=>'red',
-  1:(r,c)=>'blue',
-  2:(r,c)=>'white',
-  3:(r,c)=>'black',
-  4:(r,c)=>'Yellow',
-  5:(r,c)=>'magenta',
+  0:(r,c)=>'#ff0000',//'red',
+  1:(r,c)=>'#0000ff',//'blue',
+  2:(r,c)=>'#FFFFFF',//'white',
+  3:(r,c)=>'#000000',//'black',
+  4:(r,c)=>'#FFFF00',//'Yellow',
+  5:(r,c)=>'FF00FF',//'magenta',
 }
 
 let color_dict3  = {
