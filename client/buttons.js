@@ -23,19 +23,37 @@ let toggle_capselock = false;
 let num_animations = 0;
 let max_num_animations = 3
 let color_element_ids_dict = {}
+let toggle_info = false
+
+let demo_handler = []
+
+
+document.querySelector(".info_btn").addEventListener("click",function(){
+  let info = document.querySelector(".information");
+  toggle_info = !toggle_info
+  if (toggle_info){
+    info.style.visibility = "visible"
+  }
+  else {
+    info.style.visibility = "hidden"
+
+  }
+})
+document.querySelector(".skip").addEventListener("click",function(){
+  stopDemo()
+  this.style.visibility = "hidden"
+
+})
+
 
 // let port = "http://localhost:3000"
 
 let port = "http://3.69.98.116:3000"
 
-
 let action_right = document.querySelector(".action.right")
 let action_left = document.querySelector(".action.left")
 let timeline = document.querySelector(".timeline")
 let nav = document.querySelector("nav")
-
-
-// console.log(action.style)
 action_left.style.visibility = "hidden"
 action_right.style.visibility = "hidden"
 timeline.style.visibility = "hidden"
@@ -51,27 +69,31 @@ let time_for_demo = 0;
     run_rendered_frames(rendered_frames)
     time_for_demo = rendered_frames.length*time_ms
     return time_for_demo
-    // console.log(data.data)
   }
   time_for_demo=  playDemo()
   setTimeout(()=>{
     console.log(time_for_demo)
     setTimeout(()=>{
-      action_left.style.visibility = "visible"
-      action_right.style.visibility = "visible"
-      timeline.style.visibility = "visible"
-      nav.style.visibility = "visible"
-
-      state_array = []
-      CreateStateArray()
-      set_configuration(state_array)
-      time_ms = 1000/fps;
-      current_frame = 0;
-      // document.querySelector(".button_create.clear").click()
-
+      stopDemo()
+      document.querySelector(".skip").style.visibility = "hidden"
     },time_for_demo)
 
   },1000)
+
+
+  function stopDemo(){
+    for (let i = 0; i< demo_handler.length ; i++){
+      clearTimeout( demo_handler[i]);
+    }
+    action_left.style.visibility = "visible"
+    action_right.style.visibility = "visible"
+    timeline.style.visibility = "visible"
+    nav.style.visibility = "visible"
+    state_array = []
+    CreateStateArray()
+    set_configuration(state_array)
+    time_ms = 1000/fps;
+    current_frame = 0  }
 //   console.log(time_for_demo)
 //
 
@@ -93,13 +115,22 @@ const bckColor = "#383636"
 paint_state = 0
 
 let color_dict  = {
-  0:(r,c)=>'#171616',
-  1:(r,c)=>'#B51F1F',
-  2:(r,c)=>'#cb4406',
-  3:(r,c)=>'#F3F1E0',
-  4:(r,c)=>'#cb9d06',
-  5:(r,c)=>'#065684',
+  0:(r,c)=>'#FFCE02',
+  1:(r,c)=>'#f37021',
+  2:(r,c)=>'#F3F1E0',
+  3:(r,c)=>'#FFA6A6',
+  4:(r,c)=>'#FF95B1',
+  5:(r,c)=>'#171616',
 }
+//
+// let color_dict  = {
+//   0:(r,c)=>'#171616',
+//   1:(r,c)=>'#B51F1F',
+//   2:(r,c)=>'#cb4406',
+//   3:(r,c)=>'#F3F1E0',
+//   4:(r,c)=>'#cb9d06',
+//   5:(r,c)=>'#065684',
+// }
 
 
 let color_dict1  = {
@@ -390,11 +421,14 @@ function handlePlay(){
     is_play = !is_play;
   }
   else {
+    if (current_frame>frames.length-2){
+      current_frame = 0;
+    }
     if (!is_loop){
       is_play = !is_play;
-      if (current_frame>frames.length-2){
-        current_frame = 0;
-      }
+      // if (current_frame>frames.length-2){
+      //   current_frame = 0;
+      // }
       let num_remain_frames = run_frames();
       xxxx = setTimeout(function(){
         is_play = false;
@@ -538,6 +572,7 @@ function copyFrame(ref_frame){
     return num_frames_;
   }
 
+
   function run_rendered_frames(rendered_frames){
     current_frame = Math.min(current_frame,frames.length)
     let num_frames_ = rendered_frames.length - current_frame ;
@@ -550,6 +585,7 @@ function copyFrame(ref_frame){
         current_frame = j;
         document.getElementById('frame_slider').value = j;
       },i*time_ms );
+      demo_handler.push(s)
     }
   }
 

@@ -168,7 +168,7 @@ var spawn = require('child_process').spawn
 
 function makePngs(name,speed, frames){
 
-let margin = 0;
+let margin = 1;
 let brick_dim = [10, 10];
 
 num_rows = 30
