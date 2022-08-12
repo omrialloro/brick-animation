@@ -46,9 +46,9 @@ document.querySelector(".skip").addEventListener("click",function(){
 })
 
 
-// let port = "http://localhost:3000"
+let port = "http://localhost:2000"
 
-let port = "http://3.69.98.116:3000"
+// let port = "http://3.69.98.116:3000"
 
 let action_right = document.querySelector(".action.right")
 let action_left = document.querySelector(".action.left")
@@ -108,29 +108,31 @@ const bckColor = "#383636"
 
 // #1a0000 #ff471a 10 השיכה
 // #cca300 #ff471a 10 שקיעה
-// #b38600 #4d3900 10
-// #2fb6b6 #103d3d 10
+// #cc3300 #3333ff 40
+// #ff5050 #103d3d 40
+// #ffff00 #103d3d 40
 
 
 paint_state = 0
 
-let color_dict  = {
-  0:(r,c)=>'#FFCE02',
-  1:(r,c)=>'#f37021',
-  2:(r,c)=>'#F3F1E0',
-  3:(r,c)=>'#FFA6A6',
-  4:(r,c)=>'#FF95B1',
-  5:(r,c)=>'#171616',
-}
-//
 // let color_dict  = {
-//   0:(r,c)=>'#171616',
-//   1:(r,c)=>'#B51F1F',
-//   2:(r,c)=>'#cb4406',
-//   3:(r,c)=>'#F3F1E0',
-//   4:(r,c)=>'#cb9d06',
-//   5:(r,c)=>'#065684',
+//   0:(r,c)=>'#FFCE02',
+//   1:(r,c)=>'#f37021',
+//   2:(r,c)=>'#F3F1E0',
+//   3:(r,c)=>'#FFA6A6',
+//   4:(r,c)=>'#FF95B1',
+//   5:(r,c)=>'#171616',
 // }
+
+
+let color_dict  = {
+  0:(r,c)=>'#171616',
+  1:(r,c)=>'#B51F1F',
+  2:(r,c)=>'#cb4406',
+  3:(r,c)=>'#F3F1E0',
+  4:(r,c)=>'#cb9d06',
+  5:(r,c)=>'#065684',
+}
 
 
 let color_dict1  = {
@@ -1347,8 +1349,17 @@ function create_bool_array(){
   }
 
   function colorOscillatorCb(col1, col2, num_frames){
+    console.log(col1)
     let col1_rgb = hexToRgb(col1)
     let col2_rgb = hexToRgb(col2)
+    console.log(col1)
+
+    console.log(col1_rgb)
+    console.log(col2)
+
+    console.log(col2_rgb)
+
+
     let r_diff = col2_rgb[0]-col1_rgb[0]
     let g_diff = col2_rgb[1]-col1_rgb[1]
     let b_diff = col2_rgb[2]-col1_rgb[2]
