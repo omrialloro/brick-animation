@@ -5,7 +5,6 @@ const express = require('express')
 const fs = require('fs')
 const PNG = require('pngjs').PNG;
 
-
 app = express()
 
 app.use(express.json({limit: '25mb'}));
@@ -18,8 +17,8 @@ app.use(function(req, res, next) {
     next();
 })
 
-app.listen(3000)
-console.log("listening to port 3000")
+app.listen(4000)
+console.log("listening to port 4000")
 
 app.get('/check',function (req,res){
   console.log("running")
@@ -29,6 +28,7 @@ app.get('/check',function (req,res){
 
 app.get('/download/:filename', (req,res)=>{
   let filename = req.params.filename
+  console.log("dffdf")
   gif_path = `extracted_gifs/${filename}.gif`
   let is_ready = false
   const intervalObj = setInterval(function() {
@@ -70,9 +70,8 @@ function checkFilesReady(name,num_files){
     return is_ready
   }
 }
-// app.get('/check', function (req, res) {
-//   res.send("ok")
-// })
+
+ms = 20;
 
 app.get('/api/sessions', function (req, res) {
   let json_files_list = [];
@@ -86,12 +85,40 @@ app.get('/api/sessions', function (req, res) {
   res.send(filenames_list)
 })
 
+app.get('/animationsList/:username', function (req, res) {
+  let json_files_list = [];
+  const username = req.params.username
+
+  files = fs.readdirSync(__dirname+"/"+username)
+  files.forEach(file => {
+      if (path.extname(file) == ".json")
+        json_files_list.push(path.basename(file,".json"));
+    })
+  var filenames_list = JSON.stringify(json_files_list)
+  res.send(filenames_list)
+})
+
+app.get('/loadAnimation/:username/:filename', function (req, res) {
+  let json_files_list = [];
+  console.log("FFFFFF")
+  const username = req.params.username
+  const filename = req.params.filename
+
+  console.log(username)
+  console.log(__dirname+`/${username}/${filename}.json`)
+
+
+
+  var data = fs.readFileSync(__dirname+`/${username}/${filename}.json`)
+  var data_str = JSON.parse(data)
+  res.send(data_str)
+})
+
 app.get('/api/:filename', function (req, res) {
   const filename = req.params.filename
   var data = fs.readFileSync(`saved_sessions/${filename}.json`)
   var data_str = JSON.parse(data)
   res.send(data_str)
-
 })
 
 app.get('/demo', function (req, res) {
@@ -109,7 +136,71 @@ app.post('/api',(request, response)=>{
   fs.writeFile(`saved_sessions/${data_str["session_name"]}.json`, data, function (err) {
   if (err) return console.log(err);
   });
+})
 
+app.post('/saveSession',(request, response)=>{
+  var data = JSON.stringify(request.body)
+  var data_str = JSON.parse(data)
+  if (!fs.existsSync('edit_sessions')){
+    fs.mkdirSync('edit_sessions')
+  }
+  fs.writeFile(`edit_sessions/${data_str["filename"]}.json`, data, function (err) {
+  if (err) return console.log(err);
+  });
+})
+
+app.post('/saveAnimation',(request, response)=>{
+  var data = JSON.stringify(request.body)
+  var data_str = JSON.parse(data)
+  var username = data_str["username"]
+  var name = data_str["name"]
+
+  if (!fs.existsSync(username)){
+    fs.mkdirSync(username)
+  }
+  fs.writeFile(`${username}/${name}.json`, data, function (err) {
+  if (err) return console.log(err);
+  });
+})
+
+app.post('/snapshots/save',(request, response)=>{
+
+  var data = JSON.stringify(request.body)
+  var data_str = JSON.parse(data)
+  var username = data_str["username"]
+  if (!fs.existsSync('snapshots')){
+    fs.mkdirSync('snapshots')
+  }
+  fs.writeFile(`snapshots/${username}.json`, data, function (err) {
+  if (err) return console.log(err);
+  });
+})
+
+app.get('/snapshots/load/:username', function (req, res){
+  const username = req.params.username
+  console.log("LOADING")
+  let path = `snapshots/${username}.json`
+  if (!fs.existsSync(path)) {
+    fs.copyFile('snapshots/anonymous.json',path,  (err) => {
+    if (err) throw err;
+    console.log('source.txt was copied to destination.txt');
+    });
+    var data = fs.readFileSync(`snapshots/anonymous.json`)
+  }
+  else{
+    var data = fs.readFileSync(`snapshots/${username}.json`)
+
+
+  }
+  var data_str = JSON.parse(data)
+  res.send(data_str)
+})
+
+app.get('/loadSession/:filename', function (req, res) {
+  const filename = req.params.filename
+  var data = fs.readFileSync(`edit_sessions/${filename}.json`)
+  var data_str = JSON.parse(data)
+  res.send(data_str)
 })
 
 app.post('/gif',(request, response)=>{
@@ -168,7 +259,7 @@ var spawn = require('child_process').spawn
 
 function makePngs(name,speed, frames){
 
-let margin = 1;
+let margin = 0;
 let brick_dim = [10, 10];
 
 num_rows = 30
